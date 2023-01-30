@@ -10,7 +10,7 @@
             <h1>Delivery Tracker</h1>
         </header>
         <div>
-            <input type="button" value="Add an Entry">
+            <input id="addEntry" type="button" value="Add an Entry">
         </div>
         <form id="addForm">
             <div>
@@ -46,19 +46,53 @@
 
         </div>
         <div>
-            <ul id="totalGrid">
-                <li id="delivery">Total Deliveries: </li>
-                <li id="delAmount">16</li>
-                <li id="near">Near deliveries: </li>
-                <li id="nearAmount">10</li>
-                <li id="nearCalculation">Near @ 1.75 ea: </li>
-                <li id="nearCalcAmount">17.50</li>
-                <li>Far: <span>5</span> @ 3.25 ea = <span>16.25</span></li>
-                <li>Very Far: 2 @4.25 ea = 8.5</li>
-                <li>Gratuity: 54.00</li>
+            <input id="endNight" type="button" value="End Night">
+        </div>
+        <div>
+            <ul>
+                <li>Near deliveries: </li>
+                <li class="thirdColumn">10</li>
+                <li>Far Deliveries: </li>
+                <li class="thirdColumn">3</li>
+                <li>Very Far Deliveries:</li>
+                <li class="thirdColumn">3</li>
+                <li class="totals">Total Deliveries:</li>
+                <li class="thirdColumn totals">16</li>
             </ul>
-            <!--<p id="test1">Cash Tips</p>
-            <p id="test2">Cash Order Total</p>-->
+        </div>
+        <div>
+            <ul>
+                <li>Near @ 1.50 ea: </li>
+                <li class="thirdColumn">15.00</li>
+                <li>Far @ 3.25 ea:</li>
+                <li class="thirdColumn">9.75</li>
+                <li>Very Far @ 4.25 ea:</li>
+                <li class="thirdColumn">12.75</li>
+                <li class="totals">Total Delivery Fees:</li>
+                <li class="thirdColumn totals">37.50</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li>CC Gratuity:</li>
+                <li class="thirdColumn">83.00</li>
+                <li>Delivery Fess:</li>
+                <li class="thirdColumn">37.50</li>
+                <li class="totals">Total From CC</li>
+                <li class="thirdColumn totals">120.50</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li>Total From CC:</li>
+                <li class="thirdColumn">120.50</li>
+                <li>Cash Gratuity:</li>
+                <li class="thirdColumn">60.00</li>
+                <li class="owed">Total Cash Owed:</li>
+                <li class="thirdColumn owed">- 83.75</li>
+                <li class="totals">Night Total</li>
+                <li class="thirdColumn totals">96.75</li>
+            </ul>
         </div>
         
         <footer>

@@ -1,0 +1,51 @@
+body {
+    margin:auto;
+    background-image: url(../Images/carbon_fibre.webp);
+    background-repeat: repeat;
+    color: white;
+    text-align: center;
+    width:100%
+}
+
+#deliveries{
+    width:90%;
+    height:30em;
+    background-color: white;
+    border-style: solid;
+    border-color: #3A68E8;
+    border-width: .24em;
+    margin:auto;
+    box-shadow: 2px 2px #40A4FF;
+}
+
+form {
+    margin:1em;
+}
+
+#addForm {
+    display:none;
+}
+
+ul {
+    list-style-type: none;
+    text-align: left;
+}
+
+#totalGrid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap:10px;
+    width:90%;
+}
+
+#delivery{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+#delAmount, #nearAmount, #nearCalcAmount{
+    grid-column-start: 3;
+    grid-column-end: 3;
+    text-align: right;
+}
+

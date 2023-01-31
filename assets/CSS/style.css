@@ -9,6 +9,7 @@ body {
     background-image: url(../Images/carbon_fibre.webp);
     background-repeat: repeat;
     text-align: center;
+    padding-bottom:10px;
     width:100%
 }
 
@@ -30,15 +31,44 @@ h1 {
     margin:auto;
     margin-top: 10px;
     margin-bottom: 10px;
+    display:none;
 }
 
 form {
-    margin:1em;
+    
+    background: url(../Images/fabric_1.webp);
+    width:90%;
+    margin:auto;
+    border-style:solid;
+    border-width:6px;
+    border-color:#281FAD;
+   
+}
+.formDiv {
+    margin: 10px;
 }
 
-#addForm {
-    display:none;
+#orderTotal, #gratuity, #address {
+    border-style: solid;
+    border-width:2px;
+    border-color:#281FAD
 }
+
+#cash, #cc, #web, #near, #far, #veryFar {
+    margin-left: 10px;
+}
+
+#submitDelivery {
+    background-color:#39FF14;
+    width: 80%;
+    height: 30px;
+    border-style:solid;
+    border-width: 2px;
+    border-color:#281FAD;
+    color:#281FAD;
+}
+
+
 
 ul {
     list-style-type: none;
@@ -50,7 +80,7 @@ ul {
     margin: auto;
     padding-top:6px;
     padding-bottom: 6px;
-    font-family: 'Alfa Slab One', cursive;
+    font-family: 'DM Serif Display', serif;
     font-size: 14px;
     color:white;
 }

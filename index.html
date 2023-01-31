@@ -16,11 +16,11 @@
             <input id="addEntry" type="button" value="Add an Entry">
         </div>
         <form id="addForm">
-            <div>
+            <div class="formDiv">
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address">
             </div>
-            <div>
+            <div class="formDiv">
                 <input type="checkbox" id="near" name="near" value="near">
                 <label for="near">Near ($2.25)</label>
                 <input type="checkbox" id="far" name="far" value="far">
@@ -28,7 +28,7 @@
                 <input type="checkbox" id="veryFar" name="veryFar" value="veryFar">
                 <label for="veryFar">Very Far ($5.00)</label>
             </div>
-            <div>
+            <div class="formDiv">
                 <input type="checkbox" id="cash" name="cash" value="cash">
                 <label for="cash">Cash</label>
                 <input type="checkbox" id="cc" name="cc" value="cc">
@@ -36,13 +36,16 @@
                 <input type="checkbox" id="web" name="web" value="web">
                 <label for="web">Web</label>
             </div>
-            <div>
+            <div class="formDiv">
                 <label for="gratuity">Gratuity:</label>
                 <input type="text" id="gratuity" name="gratuity">
             </div>
-            <div>
+            <div class="formDiv">
                 <label for="orderTotal">Order Total:</label>
                 <input type="text" id="orderTotal" name="orderTotal">
+            </div>
+            <div class="formDiv">
+                <input id="submitDelivery" type="button" value="Submit Delivery">
             </div>
         </form>
         <div id="deliveries">

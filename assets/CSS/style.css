@@ -15,7 +15,7 @@ body {
 
 h1 {
     margin-top:20px;
-    color:#39FF14;;
+    color:#ffff33;;
     font-size: 44px;
     text-shadow: 2px 2px #281FAD;
     font-family: 'Permanent Marker', cursive;
@@ -58,7 +58,7 @@ form {
 }
 
 #submitDelivery {
-    background-color:#39FF14;
+    background-color:#ffff33;
     width: 80%;
     height: 30px;
     border-style:solid;
@@ -81,7 +81,7 @@ ul {
     padding-bottom: 6px;
     font-family: 'DM Serif Display', serif;
     font-size: 14px;
-    color:white;
+    color:#ebebeb;
 }
 
 .thirdColumn{
@@ -91,23 +91,26 @@ ul {
 }
 
 .totals{
-    color: #39FF14;;
+    color: #ffff33;;
 }
 
 .owed {
     
-    color: #ffff33;
-    font-weight: 900;
+    color: red;
+    font-weight: 400;
 }
 
 #addEntry, #endNight {
     margin-top: 24px;
     margin-bottom:18px;
     width: 90%;
-    height: 24px;
+    height: 30px;
     margin-left:auto;
     margin-right:auto;
     background-color: #281FAD;
-    color: white;
+    color: #ffff33;
+    border-style:solid;
+    border-width: 2px;
+    border-color:#ffff33;
 }
 

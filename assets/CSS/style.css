@@ -95,11 +95,6 @@ ul {
     color: #ffff33;;
 }
 
-.owed {
-    
-    color: red;
-}
-
 #addEntry, #endNight {
     margin-top: 24px;
     margin-bottom:18px;
@@ -112,5 +107,9 @@ ul {
     border-style:solid;
     border-width: 2px;
     border-color:#ffff33;
+}
+
+.totalOrder {
+    display: none;
 }
 

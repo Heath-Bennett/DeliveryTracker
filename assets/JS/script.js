@@ -15,17 +15,71 @@ $(document).ready(function(){
     let cashGratuity = 0;
     let totalCashOwed = 0;
     let nightTotal = 0;
+
+    const deliveries = document.getElementById('deliveries');
+    const addForm = document.getElementById('addForm');
+    const nearBox = document.getElementById('near');
+    const farBox = document.getElementById('far');
+    const veryFarBox = document.getElementById('veryFar');
+    const cashBox = document.getElementById('cash');
+    const ccBox = document.getElementById('cc');
+    const webBox = document.getElementById('web');
+    const orderTotal = document.querySelector('.totalOrder');
     
     document.querySelector('#addEntry').onclick = () => {
-        console.log('button clicked');
-        document.getElementById('deliveries').style.display = 'none';
-        document.getElementById('addForm').style.display = 'block';
+        deliveries.style.display = 'none';
+        addForm.style.display = 'block';
     };
 
     document.querySelector('#submitDelivery').onclick = () => {
-        document.getElementById('deliveries').style.display = 'block';
-        document.getElementById('addForm').style.display = 'none';
+        deliveries.style.display = 'block';
+        addForm.style.display = 'none';
     };
+
+    nearBox.addEventListener('change', (n) => {
+        if(n.target.checked){
+            farBox.checked = false;
+            veryFarBox.checked = false;
+        }
+    });
+
+    farBox.addEventListener('change', (f) => {
+        if(f.target.checked){
+            nearBox.checked = false;
+            veryFarBox.checked = false;
+        }
+    });
+
+    veryFarBox.addEventListener('change', (v) => {
+        if(v.target.checked){
+            farBox.checked = false;
+            nearBox.checked = false;
+        }
+    });
+
+    cashBox.addEventListener('change', (ca) =>{
+        if(ca.target.checked){
+            ccBox.checked = false;
+            webBox.checked = false;
+            orderTotal.style.display = 'block';
+        }
+    });
+
+    ccBox.addEventListener('change', (cc) =>{
+        if(cc.target.checked){
+            cashBox.checked = false;
+            webBox.checked = false;
+            orderTotal.style.display = 'none';
+        }
+    });
+
+    webBox.addEventListener('change', (w) =>{
+        if(w.target.checked){
+            ccBox.checked = false;
+            cashBox.checked = false;
+            orderTotal.style.display = 'none';
+        }
+    });
 });
 
 

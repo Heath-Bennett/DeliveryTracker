@@ -45,7 +45,7 @@ $(document).ready(function(){
     };
 
     /*This calculates total delivery fees and how many of each type.  
-    Called in the submit button event listener.*/
+    Called in the function calcTotals.*/
     function myFee (delvFee){
         if (delvFee === 2.25){
             nearDeliver += 1;
@@ -78,12 +78,18 @@ $(document).ready(function(){
             myFee(deliveryList[i].fee);    
         }
 
-        console.log(nearDeliver);
+        totalDeliver = nearDeliver + farDeliver + veryFarDeliver;
         console.log(nearDollar);
-        console.log(farDeliver);
         console.log(farDollar);
-        console.log(veryFarDeliver);
         console.log(veryFarDollar);
+    };
+
+    function changeHtml () {
+        document.getElementById('nearDev').textContent = nearDeliver;
+        document.getElementById('farDev').textContent = farDeliver;
+        document.getElementById('veryFarDev').textContent = veryFarDeliver;
+        document.getElementById('totalDev').textContent = totalDeliver;
+        
     };
 
     //Pops up the menu for adding an entry
@@ -118,6 +124,7 @@ $(document).ready(function(){
         const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
         deliveryList.push(delivery1);
         calcTotals();
+        changeHtml();
         resetTotals();
         
         

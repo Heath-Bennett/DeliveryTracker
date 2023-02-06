@@ -96,7 +96,9 @@ $(document).ready(function(){
             else{
                 ccGratuity += deliveryList[i].gratuity;
             }
-            totalCashOwed += deliveryList[i].total;
+            if (isNaN(deliveryList[i].total) === false){
+                totalCashOwed += deliveryList[i].total;
+            }
         }
         
         totalDeliver = nearDeliver + farDeliver + veryFarDeliver;

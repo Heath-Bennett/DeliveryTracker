@@ -34,6 +34,12 @@ $(document).ready(function(){
     const table = document.getElementById('deliver');
     const deliveryList = [];
     
+    //This will ensure there are two decimal places for dollar amounts.
+    const formatter = new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits:2,
+    });
+    
     //This creates a Delivery object
     function Delivery (deliveryStop, deliveryAddress, deliveryFee, deliveryPayment, deliveryGratuity, deliveryTotal) {
         this.stop = deliveryStop, 
@@ -70,18 +76,33 @@ $(document).ready(function(){
         farDollar = 0;
         veryFarDeliver = 0;
         veryFarDollar = 0;
+        totalDeliver = 0;
+        ccGratuity = 0;
+        totalCC = 0;
+        cashGratuity = 0;
+        totalCashOwed = 0;
+        nightTotal = 0;
+        delFee = 0;
     };
 
     // This calculates all totals and is called in the submit button event listener.
     function calcTotals (){
         for (let i = 0; i < deliveryList.length; i++){
-            myFee(deliveryList[i].fee);    
-        }
+            myFee(deliveryList[i].fee);
 
+            if (deliveryList[i].payment === 'Cash'){
+                cashGratuity += deliveryList[i].gratuity;
+            }
+            else{
+                ccGratuity += deliveryList[i].gratuity;
+            }
+            totalCashOwed += deliveryList[i].total;
+        }
+        
         totalDeliver = nearDeliver + farDeliver + veryFarDeliver;
-        console.log(nearDollar);
-        console.log(farDollar);
-        console.log(veryFarDollar);
+        totalDollar = nearDollar + farDollar +  veryFarDollar;
+        totalFromCC = totalDollar + ccGratuity;
+        nightTotal = totalFromCC + cashGratuity;
     };
 
     function changeHtml () {
@@ -89,8 +110,18 @@ $(document).ready(function(){
         document.getElementById('farDev').textContent = farDeliver;
         document.getElementById('veryFarDev').textContent = veryFarDeliver;
         document.getElementById('totalDev').textContent = totalDeliver;
-        
-    };
+        document.getElementById('nearTotal').textContent = formatter.format(nearDollar);
+        document.getElementById('farTotal').textContent = formatter.format(farDollar);
+        document.getElementById('veryFarTotal').textContent = formatter.format(veryFarDollar);
+        document.getElementById('totalFees').textContent = formatter.format(totalDollar);
+        document.getElementById('delFeeTotal').textContent = formatter.format(totalDollar);
+        document.getElementById('ccGratuity').textContent = formatter.format(ccGratuity);
+        document.getElementById('totalFromCC').textContent = formatter.format(totalFromCC);
+        document.getElementById('ccTotal').textContent = formatter.format(totalFromCC);
+        document.getElementById('cashGratuity').textContent = formatter.format(cashGratuity);
+        document.getElementById('cashOwed').textContent = `- ${formatter.format(totalCashOwed)}`;
+        document.getElementById('nightTotal').textContent = formatter.format(nightTotal);
+    };  
 
     //Pops up the menu for adding an entry
     document.querySelector('#addEntry').onclick = () => {
@@ -100,29 +131,30 @@ $(document).ready(function(){
 
     //Submits the delivery and closes menu for adding an entry
     document.querySelector('#submitDelivery').onclick = () => {
+        
         deliveries.style.display = 'block';
         addForm.style.display = 'none';
         deliveryCount += 1;
-
+        
         let delAddress = address.value;
         let delGratuity = gratuity.value;
         let delTotal = orderTotal.value;
-
+        
         let template = `
-                    <tr>
-                        <td>${deliveryCount}</td>
-                        <td>${delAddress}</td>
-                        <td>${delPayment}</td>
-                        <td>${delTotal}</td>
-                        <td>${delGratuity}</td>
-                        <td>${delFee}</td>
-                    </tr>
-                        `;
+        <tr>
+        <td>${deliveryCount}</td>
+        <td>${delAddress}</td>
+        <td>${delPayment}</td>
+        <td>${formatter.format(delTotal)}</td>
+        <td>${formatter.format(delGratuity)}</td>
+        <td>${formatter.format(delFee)}</td>
+        </tr>
+        `;
         
         table.innerHTML += template;
-
         const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
         deliveryList.push(delivery1);
+        document.getElementById('addForm').reset();
         calcTotals();
         changeHtml();
         resetTotals();

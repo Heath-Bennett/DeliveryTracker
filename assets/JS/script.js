@@ -33,6 +33,7 @@ $(document).ready(function(){
     const orderTotal = document.getElementById('orderTotal');
     const table = document.getElementById('deliver');
     const deliveryList = [];
+    const regex = /[0-9]+\.[0-9]{2}/;
     
     //This will ensure there are two decimal places for dollar amounts.
     const formatter = new Intl.NumberFormat('en-US', {
@@ -107,6 +108,8 @@ $(document).ready(function(){
         nightTotal = totalFromCC + cashGratuity;
     };
 
+    //This populates the respective html element with calculations.
+    //It is called in the submit button event listener.
     function changeHtml () {
         document.getElementById('nearDev').textContent = nearDeliver;
         document.getElementById('farDev').textContent = farDeliver;
@@ -131,35 +134,103 @@ $(document).ready(function(){
         addForm.style.display = 'block';
     };
 
+    // "[0-9]+\.[0-9]{2}"
+    
     //Submits the delivery and closes menu for adding an entry
     document.querySelector('#submitDelivery').onclick = () => {
+        if (nearBox.checked == false && farBox.checked == false && veryFarBox.checked == false){
+            alert('Please choose a delivery fee')
+            return false;
+        }
         
-        deliveries.style.display = 'block';
-        addForm.style.display = 'none';
-        deliveryCount += 1;
+        if (cashBox.checked == false && ccBox.checked == false && webBox.checked == false){
+            alert('Please choose a payment type')
+            return false;
+        }
         
-        let delAddress = address.value;
-        let delGratuity = gratuity.value;
-        let delTotal = orderTotal.value;
+
+        if (regex.test(gratuity.value)){
+            if (cashBox.checked){
+                if(regex.test(orderTotal.value)){
+                    if(confirm(`Is the following correct?\n${address.value}  ${delPayment}  ${orderTotal.value}  ${gratuity.value}  ${delFee}`)){
+                        deliveries.style.display = 'block';
+                        addForm.style.display = 'none';
+                        deliveryCount += 1;
+                        
+                        let delAddress = address.value;
+                        let delGratuity = gratuity.value;
+                        let delTotal = orderTotal.value;
+                        
+                        let template = `
+                        <tr>
+                        <td>${deliveryCount}</td>
+                        <td>${delAddress}</td>
+                        <td>${delPayment}</td>
+                        <td>${formatter.format(delTotal)}</td>
+                        <td>${formatter.format(delGratuity)}</td>
+                        <td>${formatter.format(delFee)}</td>
+                        </tr>
+                        `;
+                        
+                        table.innerHTML += template;
+                        const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
+                        deliveryList.push(delivery1);
+                        document.getElementById('addForm').reset();
+                        calcTotals();
+                        changeHtml();
+                        resetTotals();
+
+                    }
+                    else {
+                        alert('Entry cancelled');
+                    }
+
+                }
+                else {
+                    alert('Please enter a valid dollar amount. Ex: (3.00 or 3.26)');
+                }
+            }
+            else {
+                if(confirm(`Is the following correct?\n${address.value}  ${delPayment}  ${orderTotal.value}  ${gratuity.value}  ${delFee}`)){
+                    deliveries.style.display = 'block';
+                    addForm.style.display = 'none';
+                    deliveryCount += 1;
+                    
+                    let delAddress = address.value;
+                    let delGratuity = gratuity.value;
+                    let delTotal = orderTotal.value;
+                    
+                    let template = `
+                    <tr>
+                    <td>${deliveryCount}</td>
+                    <td>${delAddress}</td>
+                    <td>${delPayment}</td>
+                    <td>${formatter.format(delTotal)}</td>
+                    <td>${formatter.format(delGratuity)}</td>
+                    <td>${formatter.format(delFee)}</td>
+                    </tr>
+                    `;
+                    
+                    table.innerHTML += template;
+                    const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
+                    deliveryList.push(delivery1);
+                    document.getElementById('addForm').reset();
+                    calcTotals();
+                    changeHtml();
+                    resetTotals();
+
+                }
+                else {
+                    alert('Entry cancelled');
+                }
+            }
+
+        }
+        else {
+            alert('Please enter a valid dollar amount. Ex: (3.00 or 3.26)');
+        };
         
-        let template = `
-        <tr>
-        <td>${deliveryCount}</td>
-        <td>${delAddress}</td>
-        <td>${delPayment}</td>
-        <td>${formatter.format(delTotal)}</td>
-        <td>${formatter.format(delGratuity)}</td>
-        <td>${formatter.format(delFee)}</td>
-        </tr>
-        `;
         
-        table.innerHTML += template;
-        const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
-        deliveryList.push(delivery1);
-        document.getElementById('addForm').reset();
-        calcTotals();
-        changeHtml();
-        resetTotals();
         
         
     };

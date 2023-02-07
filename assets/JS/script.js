@@ -133,8 +133,6 @@ $(document).ready(function(){
         deliveries.style.display = 'none';
         addForm.style.display = 'block';
     };
-
-    // "[0-9]+\.[0-9]{2}"
     
     //Submits the delivery and closes menu for adding an entry
     document.querySelector('#submitDelivery').onclick = () => {
@@ -152,7 +150,7 @@ $(document).ready(function(){
         if (regex.test(gratuity.value)){
             if (cashBox.checked){
                 if(regex.test(orderTotal.value)){
-                    if(confirm(`Is the following correct?\n${address.value}  ${delPayment}  ${orderTotal.value}  ${gratuity.value}  ${delFee}`)){
+                    if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${orderTotal.value}\n Gratuity: ${gratuity.value}\n Deliver Fee: ${delFee}`)){
                         deliveries.style.display = 'block';
                         addForm.style.display = 'none';
                         deliveryCount += 1;

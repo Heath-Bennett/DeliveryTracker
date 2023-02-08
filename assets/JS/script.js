@@ -197,9 +197,10 @@ $(document).ready(function(){
         if (regex.test(gratuity.value)){
             if (cashBox.checked){
                 if(regex.test(orderTotal.value)){
-                    if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${orderTotal.value}\n Gratuity: ${gratuity.value}\n Deliver Fee: ${delFee}`)){
+                    if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${formatter.format(orderTotal.value)}\n Gratuity: ${formatter.format(gratuity.value)}\n Deliver Fee: ${formatter.format(delFee)}`)){
                         deliveries.style.display = 'block';
                         addForm.style.display = 'none';
+                        totalOrder.style.display = 'none';
                         deliveryCount += 1;
                         
                         let delAddress = address.value;
@@ -237,9 +238,10 @@ $(document).ready(function(){
                 }
             }
             else {
-                if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${orderTotal.value}\n Gratuity: ${gratuity.value}\n Deliver Fee: ${delFee}`)){
+                if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${formatter.format(orderTotal.value)}\n Gratuity: ${formatter.format(gratuity.value)}\n Deliver Fee: ${formatter.format(delFee)}`)){
                     deliveries.style.display = 'block';
                     addForm.style.display = 'none';
+                    totalOrder.style.display = 'none';
                     deliveryCount += 1;
                     
                     let delAddress = address.value;

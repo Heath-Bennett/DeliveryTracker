@@ -128,10 +128,57 @@ $(document).ready(function(){
         document.getElementById('nightTotal').textContent = formatter.format(nightTotal);
     };  
 
+    //Stores the deliveryList array in localStorage.
+    //It is called in the submit button event listener
+    function storeIt () {
+        const arrayToStore = JSON.stringify(deliveryList);
+        localStorage.setItem('array', arrayToStore);
+    };
+
     //Pops up the menu for adding an entry
     document.querySelector('#addEntry').onclick = () => {
         deliveries.style.display = 'none';
         addForm.style.display = 'block';
+    };
+
+    //Clears the HTML of deliveries
+    document.querySelector('#endNight').onclick = () => {
+
+        if (confirm('This will erase all data! \nDo you want to continue')){
+            resetTotals();
+            deliveryCount = 0;
+            localStorage.clear();
+            table.innerHTML = `
+                    <tr>
+                        <th>No.</th>
+                        <th>Street</th>
+                        <th>Type</th>
+                        <th>Total</th>
+                        <th>Tip</th>
+                        <th>Fee</th>
+                    </tr>
+                    `;
+    
+            document.getElementById('nearDev').textContent = '0';
+            document.getElementById('farDev').textContent = '0';
+            document.getElementById('veryFarDev').textContent = '0';
+            document.getElementById('totalDev').textContent = '0';
+            document.getElementById('nearTotal').textContent = '0.00';
+            document.getElementById('farTotal').textContent = '0.00';
+            document.getElementById('veryFarTotal').textContent = '0.00';
+            document.getElementById('totalFees').textContent = '0.00';
+            document.getElementById('delFeeTotal').textContent = '0.00';
+            document.getElementById('ccGratuity').textContent = '0.00';
+            document.getElementById('totalFromCC').textContent = '0.00';
+            document.getElementById('ccTotal').textContent ='0.00';
+            document.getElementById('cashGratuity').textContent = '0.00';
+            document.getElementById('cashOwed').textContent = `- 0.00`;
+            document.getElementById('nightTotal').textContent = '0.00';
+        }
+        else {
+            alert('End of day aborted');
+        }
+
     };
     
     //Submits the delivery and closes menu for adding an entry
@@ -174,6 +221,7 @@ $(document).ready(function(){
                         const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
                         deliveryList.push(delivery1);
                         document.getElementById('addForm').reset();
+                        storeIt();
                         calcTotals();
                         changeHtml();
                         resetTotals();
@@ -189,7 +237,7 @@ $(document).ready(function(){
                 }
             }
             else {
-                if(confirm(`Is the following correct?\n${address.value}  ${delPayment}  ${orderTotal.value}  ${gratuity.value}  ${delFee}`)){
+                if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${orderTotal.value}\n Gratuity: ${gratuity.value}\n Deliver Fee: ${delFee}`)){
                     deliveries.style.display = 'block';
                     addForm.style.display = 'none';
                     deliveryCount += 1;
@@ -213,6 +261,7 @@ $(document).ready(function(){
                     const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
                     deliveryList.push(delivery1);
                     document.getElementById('addForm').reset();
+                    storeIt();
                     calcTotals();
                     changeHtml();
                     resetTotals();
@@ -290,6 +339,44 @@ $(document).ready(function(){
         }
     });
 
+    //Retrieves the string from localStorage and converts it into an array.
+    //It is then pushed into the deliveryList array.  Each object is added to 
+    //HTML.  It is called in the init function
+    function retrieveFromStorage () {
+        let retrievedObject = localStorage.getItem('array');
+        if (retrievedObject !== null){
+            let deliveryObjects = JSON.parse(retrievedObject);
+            for (let i = 0; i < deliveryObjects.length; i++){
+                deliveryCount += 1;
+                deliveryList.push(deliveryObjects[i]);
+    
+                let template = `
+                            <tr>
+                            <td>${deliveryCount}</td>
+                            <td>${deliveryObjects[i].address}</td>
+                            <td>${deliveryObjects[i].payment}</td>
+                            <td>${formatter.format(deliveryObjects[i].total)}</td>
+                            <td>${formatter.format(deliveryObjects[i].gratuity)}</td>
+                            <td>${formatter.format(deliveryObjects[i].fee)}</td>
+                            </tr>
+                            `;
+                            
+                table.innerHTML += template;
+            }
+            console.log(deliveryList);
+            calcTotals();
+            changeHtml();
+            resetTotals();
+        };
+        
+    };
+
+    //This function is called when the page initializes.
+    function init () {
+        retrieveFromStorage();
+    };
+
+    init();
 });
 
 

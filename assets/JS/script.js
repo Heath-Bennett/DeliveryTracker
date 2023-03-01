@@ -18,6 +18,7 @@ $(document).ready(function(){
     let deliveryCount = 0;
     let delFee = 0;
     let delPayment = '';
+    let cashTipOnCC = false;
     
     const deliveries = document.getElementById('deliveries');
     const addForm = document.getElementById('addForm');
@@ -42,13 +43,14 @@ $(document).ready(function(){
     });
     
     //This creates a Delivery object
-    function Delivery (deliveryStop, deliveryAddress, deliveryFee, deliveryPayment, deliveryGratuity, deliveryTotal) {
+    function Delivery (deliveryStop, deliveryAddress, deliveryFee, deliveryPayment, deliveryGratuity, deliveryTotal, deliveryTipType) {
         this.stop = deliveryStop, 
         this.address = deliveryAddress, 
         this.fee = deliveryFee, 
         this.payment = deliveryPayment, 
         this.gratuity = parseFloat(deliveryGratuity),
         this.total = parseFloat(deliveryTotal)
+        this.tipType = deliveryTipType;
     };
 
     /*This calculates total delivery fees and how many of each type.  
@@ -92,6 +94,9 @@ $(document).ready(function(){
             myFee(deliveryList[i].fee);
 
             if (deliveryList[i].payment === 'Cash'){
+                cashGratuity += deliveryList[i].gratuity;
+            }
+            else if  (deliveryList[i].tipType === true){
                 cashGratuity += deliveryList[i].gratuity;
             }
             else{
@@ -219,7 +224,7 @@ $(document).ready(function(){
                         `;
                         
                         table.innerHTML += template;
-                        const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
+                        const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal, cashTipOnCC );
                         deliveryList.push(delivery1);
                         document.getElementById('addForm').reset();
                         storeIt();
@@ -238,6 +243,13 @@ $(document).ready(function(){
                 }
             }
             else {
+                
+                if (delPayment === 'CC'){
+                    if(confirm('Was this tip in cash?')){
+                        cashTipOnCC = true;
+                    }
+                }
+                
                 if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${formatter.format(orderTotal.value)}\n Gratuity: ${formatter.format(gratuity.value)}\n Deliver Fee: ${formatter.format(delFee)}`)){
                     deliveries.style.display = 'block';
                     addForm.style.display = 'none';
@@ -260,7 +272,7 @@ $(document).ready(function(){
                     `;
                     
                     table.innerHTML += template;
-                    const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal);
+                    const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal, cashTipOnCC);
                     deliveryList.push(delivery1);
                     document.getElementById('addForm').reset();
                     storeIt();

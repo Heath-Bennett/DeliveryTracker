@@ -28,6 +28,7 @@ $(document).ready(function(){
     const cashBox = document.getElementById('cash');
     const ccBox = document.getElementById('cc');
     const webBox = document.getElementById('web');
+    const tipBox = document.getElementById('tipType');
     const totalOrder = document.querySelector('.totalOrder');
     const address = document.getElementById('address');
     const gratuity = document.getElementById('gratuity');
@@ -86,9 +87,11 @@ $(document).ready(function(){
         totalCashOwed = 0;
         nightTotal = 0;
         delFee = 0;
+        cashTipOnCC = false;
     };
 
     // This calculates all totals and is called in the submit button event listener.
+    // A true tipType indicates cash tip
     function calcTotals (){
         for (let i = 0; i < deliveryList.length; i++){
             myFee(deliveryList[i].fee);
@@ -243,14 +246,12 @@ $(document).ready(function(){
                 }
             }
             else {
-                
-                if (delPayment === 'CC'){
-                    if(confirm('Was this tip in cash?')){
+
+                if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${formatter.format(orderTotal.value)}\n Gratuity: ${formatter.format(gratuity.value)}\n Deliver Fee: ${formatter.format(delFee)}`)){
+                    if (tipBox.checked === true){
                         cashTipOnCC = true;
                     }
-                }
-                
-                if(confirm(`Is the following correct?\n Address: ${address.value}\n Payment Type: ${delPayment}\n Order Total (cash only): ${formatter.format(orderTotal.value)}\n Gratuity: ${formatter.format(gratuity.value)}\n Deliver Fee: ${formatter.format(delFee)}`)){
+
                     deliveries.style.display = 'block';
                     addForm.style.display = 'none';
                     totalOrder.style.display = 'none';
@@ -326,6 +327,7 @@ $(document).ready(function(){
     //Listens for cash to be checked an if so unchecks cc and web.
     cashBox.addEventListener('change', (ca) =>{
         if(ca.target.checked){
+            tipBox.checked = true;
             ccBox.checked = false;
             webBox.checked = false;
             totalOrder.style.display = 'block';
@@ -336,6 +338,7 @@ $(document).ready(function(){
     //Listens for cc to be checked and if so unchecks cash and web
     ccBox.addEventListener('change', (cc) =>{
         if(cc.target.checked){
+            tipBox.checked = false;
             cashBox.checked = false;
             webBox.checked = false;
             totalOrder.style.display = 'none';
@@ -346,6 +349,7 @@ $(document).ready(function(){
     //Listens for web to be checked and if so unchecks cc and cash.
     webBox.addEventListener('change', (w) =>{
         if(w.target.checked){
+            tipBox.checked = false;
             ccBox.checked = false;
             cashBox.checked = false;
             totalOrder.style.display = 'none';

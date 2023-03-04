@@ -152,41 +152,56 @@ $(document).ready(function(){
     //Clears the HTML of deliveries
     document.querySelector('#endNight').onclick = () => {
 
-        if (confirm('This will erase all data! \nDo you want to continue')){
-            resetTotals();
-            deliveryCount = 0;
-            localStorage.clear();
-            table.innerHTML = `
-                    <tr>
-                        <th>No.</th>
-                        <th>Street</th>
-                        <th>Type</th>
-                        <th>Total</th>
-                        <th>Tip</th>
-                        <th>Fee</th>
-                    </tr>
-                    `;
-    
-            document.getElementById('nearDev').textContent = '0';
-            document.getElementById('farDev').textContent = '0';
-            document.getElementById('veryFarDev').textContent = '0';
-            document.getElementById('totalDev').textContent = '0';
-            document.getElementById('nearTotal').textContent = '0.00';
-            document.getElementById('farTotal').textContent = '0.00';
-            document.getElementById('veryFarTotal').textContent = '0.00';
-            document.getElementById('totalFees').textContent = '0.00';
-            document.getElementById('delFeeTotal').textContent = '0.00';
-            document.getElementById('ccGratuity').textContent = '0.00';
-            document.getElementById('totalFromCC').textContent = '0.00';
-            document.getElementById('ccTotal').textContent ='0.00';
-            document.getElementById('cashGratuity').textContent = '0.00';
-            document.getElementById('cashOwed').textContent = `- 0.00`;
-            document.getElementById('nightTotal').textContent = '0.00';
-        }
-        else {
-            alert('End of day aborted');
-        }
-
+        swal({
+            title: "This will erase all data!",
+            text: "Once deleted, you will not be able to recover the data.\n Do you want to continue?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("Delivery Tracker has been reset!", {
+                    icon: "success",
+                });
+                resetTotals();
+                deliveryCount = 0;
+                localStorage.clear();
+                table.innerHTML = `
+                        <tr>
+                            <th>No.</th>
+                            <th>Street</th>
+                            <th>Type</th>
+                            <th>Total</th>
+                            <th>Tip</th>
+                            <th>Fee</th>
+                        </tr>
+                        `;
+        
+                document.getElementById('nearDev').textContent = '0';
+                document.getElementById('farDev').textContent = '0';
+                document.getElementById('veryFarDev').textContent = '0';
+                document.getElementById('totalDev').textContent = '0';
+                document.getElementById('nearTotal').textContent = '0.00';
+                document.getElementById('farTotal').textContent = '0.00';
+                document.getElementById('veryFarTotal').textContent = '0.00';
+                document.getElementById('totalFees').textContent = '0.00';
+                document.getElementById('delFeeTotal').textContent = '0.00';
+                document.getElementById('ccGratuity').textContent = '0.00';
+                document.getElementById('totalFromCC').textContent = '0.00';
+                document.getElementById('ccTotal').textContent ='0.00';
+                document.getElementById('cashGratuity').textContent = '0.00';
+                document.getElementById('cashOwed').textContent = `- 0.00`;
+                document.getElementById('nightTotal').textContent = '0.00';
+            }
+            else {
+                swal({
+                    title: "Aborted!",
+                    text: "Your data will not be deleted.",
+                    icon: "success"
+                })
+            };
+        });
     };
     
     //Submits the delivery and closes menu for adding an entry

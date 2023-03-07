@@ -190,6 +190,8 @@ $(document).ready(function(){
                 document.getElementById('cashGratuity').textContent = '0.00';
                 document.getElementById('cashOwed').textContent = `- 0.00`;
                 document.getElementById('nightTotal').textContent = '0.00';
+
+                window.location.reload();
             }
             else if (result.isDenied){
                 Swal.fire('Aborted!', 'Your data will not be deleted.', 'info');

@@ -330,7 +330,7 @@ $(document).ready(function(){
             Swal.fire({
                 title: 'Please enter a valid dollar amount!', 
                 text: 'Ex: (3.00 or 3.26)',
-                iconHtml: '<i class="fa fa-ban"></i>',
+                iconHtml: '<i class="material-symbols-outlined" style="font-size: 100px;">cancel</i>',
                 background: 'black',
                 customClass:{
                     icon: 'icon-class-error',

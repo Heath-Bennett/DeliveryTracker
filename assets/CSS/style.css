@@ -23,10 +23,11 @@ body {
 .icon-class-error {
     font-size: 24px;
     /*animation: glow .50s ease-in-out infinite alternate-reverse;*/
-    color: #D22730;
-    text-shadow: 0 0 5px #d4474e,
-                0 0 10px #d4474e,
-                0 0 20px #da6e73;
+    background:#000;
+    color: #fff;
+    text-shadow: 0 0 10px rgb(33, 156, 243),
+                0 0 20px rgb(247, 33, 25),
+                0 0 30px rgb(247, 33, 25);
 }
 
 

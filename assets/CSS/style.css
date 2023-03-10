@@ -20,7 +20,14 @@ body {
     text-shadow: 4px 4px #281FAD;
     font-family: 'Permanent Marker', cursive;
 }*/
-
+.icon-class-error {
+    font-size: 24px;
+    /*animation: glow .50s ease-in-out infinite alternate-reverse;*/
+    color: #D22730;
+    text-shadow: 0 0 5px #d4474e,
+                0 0 10px #d4474e,
+                0 0 20px #da6e73;
+}
 
 
 h1 {
@@ -30,7 +37,11 @@ h1 {
     text-align: center;
     font-weight: 400;
     line-height: 1;
-    animation: glow .50s ease-in-out infinite alternate-reverse;
+    color: #00ffe7;
+    text-shadow: 0 0 10px #00a1ff,
+                0 0 20px #00a1ff,
+                0 0 30px #00a1ff;
+    /*animation: glow .50s ease-in-out infinite alternate-reverse;
     color: #fff;
     text-shadow: 0 0 7px #fff,
                 0 0 10px #fff, 
@@ -39,7 +50,7 @@ h1 {
                 0 0 82px #4d4dff, 
                 0 0 92px #4d4dff, 
                 0 0 102px #4d4dff, 
-                0 0 151px #4d4dff;
+                0 0 151px #4d4dff;*/
 }
 
 @keyframes glow {

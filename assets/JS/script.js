@@ -160,7 +160,6 @@ $(document).ready(function(){
             denyButtonText: 'Abort',
         }).then ((result) => {
             if (result.isConfirmed){
-                Swal.fire('Delivery Tracker has been reset!', '', 'success');
                 resetTotals();
                 deliveryCount = 0;
                 localStorage.clear();
@@ -191,7 +190,15 @@ $(document).ready(function(){
                 document.getElementById('cashOwed').textContent = `- 0.00`;
                 document.getElementById('nightTotal').textContent = '0.00';
 
-                window.location.reload();
+                Swal.fire({
+                    title: 'Delivery Tracker has been reset!', 
+                    icon: 'success'
+                }).then ((result) =>{
+                    if (result.isConfirmed){
+                        window.location.reload();
+                    };
+                });
+
             }
             else if (result.isDenied){
                 Swal.fire('Aborted!', 'Your data will not be deleted.', 'info');
@@ -320,7 +327,16 @@ $(document).ready(function(){
 
         }
         else {
-            Swal.fire('Please enter a valid dollar amount. Ex: (3.00 or 3.26)', '', 'error');
+            Swal.fire({
+                title: 'Please enter a valid dollar amount!', 
+                text: 'Ex: (3.00 or 3.26)',
+                iconHtml: '<i class="fa fa-ban"></i>',
+                background: 'black',
+                customClass:{
+                    icon: 'icon-class-error',
+                    content: 'content-class',
+                },
+            });
         };
         
         

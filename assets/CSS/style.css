@@ -92,6 +92,7 @@ h1 {
     display:block;
 }
 
+
 form {
     
     background: url(../Images/carbon_fibre.webp);
@@ -101,8 +102,8 @@ form {
     border-width:4px;
     border-color:#00ffe7;
     box-shadow: 0 0 10px #00ffe7, 
-                0 0 20px #00a1ff,
-                0 0 30px #00a1ff;
+    0 0 20px #00a1ff,
+    0 0 30px #00a1ff;
     display: none;
     color:#fff;
 }
@@ -130,6 +131,11 @@ form {
     color:#281FAD;
 }
 
+h3 {
+    text-align: left;
+    padding-left: 24px;
+    padding-bottom: 4px;
+}
 
 
 ul {
@@ -140,8 +146,6 @@ ul {
     gap: 4px;
     width:90%;
     margin: auto;
-    padding-top:6px;
-    padding-bottom: 6px;
     
     font-size: 18px;
     color:#ebebeb;
@@ -197,3 +201,62 @@ ul {
     color: #ffff33;
 }
 
+#tipCheckBox {
+    position: relative;
+    justify-content: center;
+    left: -6%;
+}
+
+ul li label {
+    position: relative;
+    left:24px;
+
+}
+
+input[type='checkbox'] {
+    position:absolute;
+    opacity: 0;
+}
+
+ul li label div {
+    width: 50px;
+    height: 50px;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: 2px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 1), 
+                inset 0 -2px 5px rgba(0, 0, 0, 1), 
+                inset 0 2px 2px rgba(255, 255, 255, 0.2), 
+                0 0 0 2px #000, 
+                0 0 0 5px #0c0c0c, 
+                0 0 0 5.5px #080808;
+}
+
+ul li label div .fa {
+    position: absolute;
+    top:32%;
+    font-size: 20px;
+    color: #c0b8b8;
+    transition: 0.5s;
+}
+
+ul li label input[type="checkbox"]:checked ~ div {
+    background: #000;
+    border-color: #00ffe7;
+    box-shadow: 0 0 10px #00ffe7,
+                0 0 20px #00a1ff,
+                0 0 30px #00a1ff,
+                inset 0 0 5px #00a1ff;
+}
+
+ul li label input[type="checkbox"]:checked ~ div .fa {
+    color: #00ffe7;
+    text-shadow: 0 0 15px #00a1ff,
+                0 0 30px #00a1ff;
+
+}

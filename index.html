@@ -24,25 +24,90 @@
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address">
             </div>
+            <h3>Delivery Fee:</h3>
             <div class="formDiv">
-                <input type="checkbox" id="near" name="near" value="near">
+                <ul>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="near" name="">
+                            <div>
+                                <span class="fa">$2.25</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="far" name="">
+                            <div>
+                                <span class="fa">$4.25</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="veryFar" name="">
+                            <div>
+                                <span class="fa">$5.00</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+                <!--<input type="checkbox" id="near" name="near" value="near">
                 <label for="near">$2.25 Fee</label>
                 <input type="checkbox" id="far" name="far" value="far">
                 <label for="far">$4.00 Fee</label>
                 <input type="checkbox" id="veryFar" name="veryFar" value="veryFar">
-                <label for="veryFar">$5.00 Fee</label>
+                <label for="veryFar">$5.00 Fee</label>-->
             </div>
+            <h3>Order Type:</h3>
             <div class="formDiv">
-                <input type="checkbox" id="cash" name="cash" value="cash">
+                <ul>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="web" name="">
+                            <div>
+                                <i class="fa fa-globe"></i>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="cc" name="">
+                            <div>
+                                <i class="fa fa-credit-card"></i>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="cash" name="">
+                            <div>
+                                <i class="fa fa-usd"></i>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+                <!--<input type="checkbox" id="cash" name="cash" value="cash">
                 <label for="cash">Cash</label>
                 <input type="checkbox" id="cc" name="cc" value="cc">
                 <label for="cc">CC</label>
                 <input type="checkbox" id="web" name="web" value="web">
-                <label for="web">Web</label>
+                <label for="web">Web</label>-->
             </div>
+            <h3>Cash Tip:</h3>
             <div class="formDiv">
-                <input type="checkbox" id="tipType" name="tipType" value="cash">
-                <label for="tipType">Cash Tip</label>
+                <ul id="tipCheckBox">
+                    <li>
+                        <label>
+                            <input type="checkbox" id="tipType" name="">
+                            <div>
+                                <span class="fa">Yes</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+                <!--<input type="checkbox" id="tipType" name="tipType" value="cash">
+                <label for="tipType">Cash Tip</label>-->
             </div>
             <div class="formDiv">
                 <label for="gratuity">Gratuity (omit $):</label>

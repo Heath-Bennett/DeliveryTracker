@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 * {
 	padding: 0;
 	margin: 0;
-	border: 0;
+	box-sizing: border-box;
 	}
 
 body {
@@ -10,7 +12,8 @@ body {
     background-repeat: repeat;
     text-align: center;
     padding-bottom:10px;
-    width:100%
+    width:100%;
+    font-family: 'Poppins', sans-serif;
 }
 
 /*h1 {
@@ -111,11 +114,7 @@ form {
     margin: 10px;
 }
 
-#orderTotal, #gratuity, #address {
-    border-style: solid;
-    border-width:2px;
-    border-color:#281FAD
-}
+
 
 #cash, #cc, #web, #near, #far, #veryFar {
     margin-left: 10px;
@@ -193,19 +192,13 @@ ul {
     border-color:#ffff33;
 }
 
-.totalOrder {
-    display: none;
-}
+
 
 .owed {
     color: #ffff33;
 }
 
-#tipCheckBox {
-    position: relative;
-    justify-content: center;
-    left: -6%;
-}
+/*start CSS for checkbox buttons*/
 
 ul li label {
     position: relative;
@@ -259,4 +252,56 @@ ul li label input[type="checkbox"]:checked ~ div .fa {
     text-shadow: 0 0 15px #00a1ff,
                 0 0 30px #00a1ff;
 
+}
+
+/*end CSS for checkbox buttons*/
+
+/*CSS starts for text input*/
+
+.inputBox {
+    position: relative;
+    width:94%;
+    justify-content: center;
+    padding: 4px 0;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    background: #000;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+    transition: 0.5s;
+}
+
+.inputBox span {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+    color: #00ffe7;
+    transform: translateX(10px) translateY(-8px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    background: #00ffe7;
+    color: #1d2b3a;
+    border-radius:2px;
+    letter-spacing: 0.2em;
+
+}
+
+.inputBox input:valid ,
+.inputBox input:focus {
+    border: 1px solid #00ffe7;
 }

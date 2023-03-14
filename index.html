@@ -20,9 +20,9 @@
             <button id="addEntry" type="button">Add Entry</button>
         </div>
         <form id="addForm">
-            <div class="formDiv">
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address">
+            <div class="formDiv inputBox">
+                <input type="text" id="address" required="required" autocomplete="off">
+                <span>Address</span>
             </div>
             <h3>Delivery Fee:</h3>
             <div class="formDiv">
@@ -39,7 +39,7 @@
                         <label>
                             <input type="checkbox" id="far" name="">
                             <div>
-                                <span class="fa">$4.25</span>
+                                <span class="fa">$4.00</span>
                             </div>
                         </label>
                     </li>
@@ -109,13 +109,13 @@
                 <!--<input type="checkbox" id="tipType" name="tipType" value="cash">
                 <label for="tipType">Cash Tip</label>-->
             </div>
-            <div class="formDiv">
-                <label for="gratuity">Gratuity (omit $):</label>
-                <input type="text" id="gratuity" name="gratuity">
+            <div class="formDiv inputBox">
+                <input type="text" id="gratuity" required="required">
+                <span>Gratuity</span>
             </div>
-            <div class="formDiv totalOrder">
-                <label for="orderTotal">Order Total (omit $):</label>
-                <input type="text" id="orderTotal" name="orderTotal">
+            <div class="formDiv totalOrder inputBox">
+                <input type="text" id="orderTotal" required="required">
+                <span>Order Total</span>
             </div>
             <div class="formDiv">
                 <button id="submitDelivery" type="button">Submit Delivery</button>

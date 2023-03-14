@@ -98,15 +98,13 @@ $(document).ready(function(){
 
             if (deliveryList[i].payment === 'Cash'){
                 cashGratuity += deliveryList[i].gratuity;
+                totalCashOwed += deliveryList[i].total;
             }
             else if  (deliveryList[i].tipType === true){
                 cashGratuity += deliveryList[i].gratuity;
             }
             else{
                 ccGratuity += deliveryList[i].gratuity;
-            }
-            if (isNaN(deliveryList[i].total) === false){
-                totalCashOwed += deliveryList[i].total;
             }
         }
         
@@ -220,60 +218,7 @@ $(document).ready(function(){
         
 
         if (regex.test(gratuity.value)){
-            if (cashBox.checked){
-                if(regex.test(orderTotal.value)){
-                    let span = document.createElement('span');
-                    span.innerHTML= `Address: ${address.value}<br> Payment Type: ${delPayment}<br> Order Total (cash only): ${formatter.format(orderTotal.value)}<br> Gratuity: ${formatter.format(gratuity.value)}<br> Deliver Fee: ${formatter.format(delFee)}`,
-                    Swal.fire({
-                        title: 'Is the following correct?',
-                        html: span,
-                        icon: 'question', 
-                        showDenyButton: true, 
-                        confirmButtonText: 'Yes', 
-                        denyButtonText: 'No', 
-                    }).then ((result) =>{
-                        if (result.isConfirmed){
-                            Swal.fire('Entry has been added', '', 'info');
-                            deliveries.style.display = 'block';
-                            addForm.style.display = 'none';
-                            totalOrder.style.display = 'none';
-                            deliveryCount += 1;
-                            
-                            let delAddress = address.value;
-                            let delGratuity = gratuity.value;
-                            let delTotal = orderTotal.value;
-                            
-                            let template = `
-                            <tr>
-                            <td>${deliveryCount}</td>
-                            <td>${delAddress}</td>
-                            <td>${delPayment}</td>
-                            <td>${formatter.format(delTotal)}</td>
-                            <td>${formatter.format(delGratuity)}</td>
-                            <td>${formatter.format(delFee)}</td>
-                            </tr>
-                            `;
-                            
-                            table.innerHTML += template;
-                            const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal, cashTipOnCC );
-                            deliveryList.push(delivery1);
-                            document.getElementById('addForm').reset();
-                            storeIt();
-                            calcTotals();
-                            changeHtml();
-                            resetTotals();
-                        }
-                        else if (result.isDenied){
-                            Swal.fire('Entry cancelled', '', 'info');
-                        };
-                    });
-
-                }
-                else {
-                    Swal.fire('Please enter a valid dollar amount. Ex: (3.00 or 3.26)', '', 'error');
-                }
-            }
-            else {
+            if(regex.test(orderTotal.value)){
                 let span = document.createElement('span');
                 span.innerHTML= `Address: ${address.value}<br> Payment Type: ${delPayment}<br> Order Total (cash only): ${formatter.format(orderTotal.value)}<br> Gratuity: ${formatter.format(gratuity.value)}<br> Deliver Fee: ${formatter.format(delFee)}`,
                 Swal.fire({
@@ -286,45 +231,44 @@ $(document).ready(function(){
                 }).then ((result) =>{
                     if (result.isConfirmed){
                         Swal.fire('Entry has been added', '', 'info');
-                            if (tipBox.checked === true){
-                                cashTipOnCC = true;
-                            }
-        
-                            deliveries.style.display = 'block';
-                            addForm.style.display = 'none';
-                            totalOrder.style.display = 'none';
-                            deliveryCount += 1;
-                            
-                            let delAddress = address.value;
-                            let delGratuity = gratuity.value;
-                            let delTotal = orderTotal.value;
-                            
-                            let template = `
-                            <tr>
-                            <td>${deliveryCount}</td>
-                            <td>${delAddress}</td>
-                            <td>${delPayment}</td>
-                            <td>${formatter.format(delTotal)}</td>
-                            <td>${formatter.format(delGratuity)}</td>
-                            <td>${formatter.format(delFee)}</td>
-                            </tr>
-                            `;
-                            
-                            table.innerHTML += template;
-                            const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal, cashTipOnCC);
-                            deliveryList.push(delivery1);
-                            document.getElementById('addForm').reset();
-                            storeIt();
-                            calcTotals();
-                            changeHtml();
-                            resetTotals();
+                        deliveries.style.display = 'block';
+                        addForm.style.display = 'none';
+                        totalOrder.style.display = 'none';
+                        deliveryCount += 1;
+                        
+                        let delAddress = address.value;
+                        let delGratuity = gratuity.value;
+                        let delTotal = orderTotal.value;
+                        
+                        let template = `
+                        <tr>
+                        <td>${deliveryCount}</td>
+                        <td>${delAddress}</td>
+                        <td>${delPayment}</td>
+                        <td>${formatter.format(delTotal)}</td>
+                        <td>${formatter.format(delGratuity)}</td>
+                        <td>${formatter.format(delFee)}</td>
+                        </tr>
+                        `;
+                        
+                        table.innerHTML += template;
+                        const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal, cashTipOnCC );
+                        deliveryList.push(delivery1);
+                        document.getElementById('addForm').reset();
+                        storeIt();
+                        calcTotals();
+                        changeHtml();
+                        resetTotals();
                     }
                     else if (result.isDenied){
                         Swal.fire('Entry cancelled', '', 'info');
                     };
                 });
-            }
 
+            }
+            else {
+                Swal.fire('Please enter a valid dollar amount. Ex: (3.00 or 3.26)', '', 'error');
+            };
         }
         else {
             Swal.fire({
@@ -388,7 +332,6 @@ $(document).ready(function(){
             tipBox.checked = false;
             cashBox.checked = false;
             webBox.checked = false;
-            totalOrder.style.display = 'none';
             delPayment = 'CC';
         }
     });
@@ -399,7 +342,6 @@ $(document).ready(function(){
             tipBox.checked = false;
             ccBox.checked = false;
             cashBox.checked = false;
-            totalOrder.style.display = 'none';
             delPayment = 'Web';
         }
     });

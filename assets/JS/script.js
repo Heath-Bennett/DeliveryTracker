@@ -233,7 +233,7 @@ $(document).ready(function(){
                         Swal.fire('Entry has been added', '', 'info');
                         deliveries.style.display = 'block';
                         addForm.style.display = 'none';
-                        totalOrder.style.display = 'none';
+                        //totalOrder.style.display = 'none';
                         deliveryCount += 1;
                         
                         let delAddress = address.value;

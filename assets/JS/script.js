@@ -93,6 +93,7 @@ $(document).ready(function(){
     // This calculates all totals and is called in the submit button event listener.
     // A true tipType indicates cash tip
     function calcTotals (){
+        
         for (let i = 0; i < deliveryList.length; i++){
             myFee(deliveryList[i].fee);
 
@@ -216,6 +217,9 @@ $(document).ready(function(){
             return false;
         }
         
+        if (tipBox.checked == true){
+            cashTipOnCC = true;
+        }
 
         if (regex.test(gratuity.value)){
             if(regex.test(orderTotal.value)){
@@ -240,6 +244,7 @@ $(document).ready(function(){
                         let delGratuity = gratuity.value;
                         let delTotal = orderTotal.value;
                         
+                        
                         let template = `
                         <tr>
                         <td>${deliveryCount}</td>
@@ -251,9 +256,18 @@ $(document).ready(function(){
                         </tr>
                         `;
                         
+                        
+                        
                         table.innerHTML += template;
+                        
+                        if (cashTipOnCC == true){
+                            let x = document.getElementById('deliver').getElementsByTagName('tr');
+                            x[deliveryCount].style.backgroundColor = '#00ffe7';
+                        }
+
                         const delivery1 = new Delivery(deliveryCount, delAddress, delFee, delPayment, delGratuity, delTotal, cashTipOnCC );
                         deliveryList.push(delivery1);
+
                         document.getElementById('addForm').reset();
                         storeIt();
                         calcTotals();
@@ -356,6 +370,7 @@ $(document).ready(function(){
             for (let i = 0; i < deliveryObjects.length; i++){
                 deliveryCount += 1;
                 deliveryList.push(deliveryObjects[i]);
+                console.log(deliveryObjects[i]);
     
                 let template = `
                             <tr>
@@ -369,8 +384,12 @@ $(document).ready(function(){
                             `;
                             
                 table.innerHTML += template;
+
+                if (deliveryObjects[i].tipType == true){
+                    let x = document.getElementById('deliver').getElementsByTagName('tr');
+                    x[deliveryCount].style.backgroundColor = '#00ffe7';
+                }
             }
-            console.log(deliveryList);
             calcTotals();
             changeHtml();
             resetTotals();
